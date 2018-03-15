@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="base :: head"></div>
+</head>
+<script type="text/javascript">
+    function openTab() {
+        var param = function (content) {
+            return {
+                title: 'Order',
+                closable: true,
+                content: content
+            };
+        };
+        $.get('/page/order', function (html) {
+            var p = new param(html);
+            $('#tabs').tabs('add',p);
+        });
+
+    }
+</script>
+<body class="easyui-layout">
+<!-- 左边树形布局 -->
+<div data-options="region:'north'" style="height:50px">
+    <div style="font-size: 26px;padding-left: 2%;padding-top: 7px">非凡包装</div>
+</div>
+<div data-options="region:'west',title:'菜单',split:true" style="width:150px">
+    <ul id="menu"></ul>
+    <div id="menuTree">
+        <ul id="tt" class="easyui-tree">
+            <li>
+                <span>Folder</span>
+                <ul>
+                    <li>
+                        <span>送货管理</span>
+                        <ul>
+                            <li><span><a href="javascript:void(0)" onclick="openTab()">送货单管理</a></span>
+                            </li>
+                            <li><span>File 12</span></li>
+                            <li><span>File 13</span></li>
+                        </ul>
+                    </li>
+                    <li><span>File 2</span></li>
+                    <li><span>File 3</span></li>
+                </ul>
+            </li>
+            <li><span>File21</span></li>
+        </ul>
+    </div>
+</div>
+<!-- 右边显示内容 -->
+<div data-options="region:'center'" style="padding:5px">
+    <div id="tabs" class="easyui-tabs" data-options="fit:true, border:false">
+    </div>
+</div>
+</body>
+</html>
